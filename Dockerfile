@@ -23,7 +23,7 @@ COPY ./poetry.lock ./
 
 # Install Poetry packages without a virtualenv in container
 RUN poetry config virtualenvs.create false && \
-    poetry install
+    poetry install --no-root
 
 COPY api /api
 RUN mkdir -p /api/static
