@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    command: /bin/bash /api/bin/boot.sh
+    restart: always
+    volumes:
+      - ./api:/api
+      - static_volume:/api/staticfiles
+      - uploaded_files:/uploads
+    expose:
+      - 8001
+    env_file:
+      - ./.env
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:15
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ./db.env
+    healthcheck:
+      test: pg_isready -d $$POSTGRES_DB -U $$POSTGRES_USER
+      interval: 1s
+      timeout: 5s
+      retries: 10
+
+  nginx:
+    build: ./nginx
+    restart: always
+    ports:
+      - 8000:80
+      - 8080:8080
+    depends_on:
+      - api
+      - web
+    volumes:
+      - static_volume:/staticfiles
+      - uploaded_files:/uploads
+
+  redis:
+    image: redis:latest
+    restart: always
+    expose:
+      - 6379
+    volumes:
+      - redis_data:/data
+
+
+
+volumes:
+  postgres_data:
+  redis_data:
+  static_volume:
+  uploaded_files:
