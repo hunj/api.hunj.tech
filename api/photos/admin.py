@@ -3,14 +3,14 @@ from django.contrib import admin
 from django.utils.html import format_html
 from django.urls import path, reverse
 
-from gallery.models import (
+from photos.models import (
     Photo,
     Album,
     Person,
     Location,
     Event,
 )
-from gallery.admin_views import PhotoMultiUploadAdminView
+from photos.admin_views import PhotoMultiUploadAdminView
 
 
 @admin.register(Person)

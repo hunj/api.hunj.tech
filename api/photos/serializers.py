@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from gallery.models import Album, Photo
-from gallery.helpers import get_exif_data
+from photos.models import Album, Photo
+from photos.helpers import get_exif_data
 
 
 class PhotoSerializer(serializers.ModelSerializer):

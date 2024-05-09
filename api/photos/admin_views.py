@@ -4,11 +4,11 @@ from django.urls import reverse
 
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.views.generic import DetailView
-from gallery.models import Album, Photo
+from photos.models import Album, Photo
 
 
 class PhotoMultiUploadAdminView(PermissionRequiredMixin, DetailView):
-    permission_required = 'gallery.edit_album'
+    permission_required = 'photos.edit_album'
     template_name = 'admin/photo_upload_admin.html'
     model = Album
 

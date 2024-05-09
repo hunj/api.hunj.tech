@@ -7,13 +7,13 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('gallery', '0002_alter_album_cover'),
+        ('photos', '0002_alter_album_cover'),
     ]
 
     operations = [
         migrations.AlterField(
             model_name='album',
             name='cover',
-            field=models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='cover', to='gallery.photo'),
+            field=models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='cover', to='photos.photo'),
         ),
     ]

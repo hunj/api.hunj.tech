@@ -3,7 +3,7 @@ from django.utils.text import slugify
 from datetime import date
 
 from common.models import BaseModel
-from gallery.helpers import (
+from photos.helpers import (
     photo_upload_directory_name,
     thumbnail_upload_directory_name,
     create_thumbnail_file,

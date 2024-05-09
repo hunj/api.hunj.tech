@@ -7,14 +7,14 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('gallery', '0006_person_location_event'),
+        ('photos', '0006_person_location_event'),
     ]
 
     operations = [
         migrations.AlterField(
             model_name='event',
             name='albums',
-            field=models.ManyToManyField(related_name='events', to='gallery.album'),
+            field=models.ManyToManyField(related_name='events', to='photos.album'),
         ),
         migrations.AlterField(
             model_name='event',
@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='location',
             name='albums',
-            field=models.ManyToManyField(related_name='locations', to='gallery.album'),
+            field=models.ManyToManyField(related_name='locations', to='photos.album'),
         ),
         migrations.AlterField(
             model_name='location',
@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='person',
             name='photos',
-            field=models.ManyToManyField(related_name='tagged', to='gallery.photo'),
+            field=models.ManyToManyField(related_name='tagged', to='photos.photo'),
         ),
         migrations.AlterField(
             model_name='person',
@@ -44,6 +44,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='photo',
             name='album',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='photos', to='gallery.album'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='photos', to='photos.album'),
         ),
     ]

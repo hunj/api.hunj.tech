@@ -7,7 +7,7 @@ import uuid
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('gallery', '0005_album_slug'),
+        ('photos', '0005_album_slug'),
     ]
 
     operations = [
@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('name', models.CharField(max_length=64)),
                 ('slug', models.SlugField(default='')),
-                ('photos', models.ManyToManyField(to='gallery.photo')),
+                ('photos', models.ManyToManyField(to='photos.photo')),
             ],
             options={
                 'abstract': False,
@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('name', models.CharField(max_length=64)),
                 ('slug', models.SlugField(default='')),
-                ('albums', models.ManyToManyField(to='gallery.album')),
+                ('albums', models.ManyToManyField(to='photos.album')),
             ],
             options={
                 'abstract': False,
@@ -47,7 +47,7 @@ class Migration(migrations.Migration):
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('name', models.CharField(max_length=64)),
                 ('slug', models.SlugField(default='')),
-                ('albums', models.ManyToManyField(to='gallery.album')),
+                ('albums', models.ManyToManyField(to='photos.album')),
             ],
             options={
                 'abstract': False,
