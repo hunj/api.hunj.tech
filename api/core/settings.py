@@ -151,6 +151,10 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = BASE_DIR.parent / 'uploads'
 MEDIA_URL = '/uploads/'
 
+# File discovery directory
+
+MEDIA_DISCOVERY_ROOT = ''
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
