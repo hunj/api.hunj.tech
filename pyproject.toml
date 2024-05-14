@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "iroun-photos"
+name = "api.hunj.tech"
 version = "0.1.0"
-description = "personal photography portfolio website"
+description = "personal api"
 authors = ["hunj <hunjaelee@protonmail.com>"]
 
 [tool.poetry.dependencies]
