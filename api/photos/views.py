@@ -1,6 +1,6 @@
 from rest_framework.generics import ListAPIView, RetrieveAPIView
-from photos.models import Album, Photo, Person
-from photos.serializers import AlbumListSerializer, AlbumRetrieveSerializer, PhotoSerializer
+from .models import Album, Photo, Person
+from .serializers import AlbumListSerializer, AlbumRetrieveSerializer, PhotoSerializer
 
 
 class AlbumListAPIView(ListAPIView):
