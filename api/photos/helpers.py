@@ -7,18 +7,18 @@ import sys
 from django.core.files.uploadedfile import InMemoryUploadedFile
 
 
-THUMBNAIL_SIZE = (512, 512)
+THUMBNAIL_SIZE = (256, 256)
 THUMBNAIL_FORMAT = "JPEG"
 THUMBNAIL_CONTENT_TYPE = "image/jpeg"
-THUMBNAIL_QUALITY = 95
+THUMBNAIL_QUALITY = 100
 
 
 def photo_upload_directory_name(instance, filename):
-    return "photos/" + str(instance.uuid) + pathlib.Path(filename).suffix.lower()
+    return f"photos/{instance.album.uuid}/" + pathlib.Path(filename).name.lower()
 
 
 def thumbnail_upload_directory_name(instance, filename):
-    return "thumbnails/" + str(instance.uuid) + pathlib.Path(filename).suffix.lower()
+    return f"thumbnails/{instance.album.uuid}/" + pathlib.Path(filename).name.lower()
 
 
 def create_thumbnail_file(photo) -> InMemoryUploadedFile:
