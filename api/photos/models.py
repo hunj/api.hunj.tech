@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils.text import slugify
 from datetime import date
 
 from common.models import BaseModel
@@ -19,29 +18,16 @@ class Album(BaseModel):
     description = models.TextField(default="", blank=True)
 
     def __str__(self):
-        return self.name
-
-    def save(self, *args, **kwargs):
-        if self.name:
-            self.slug = slugify(self.name)
-        super().save(*args, **kwargs)
+        return f"{self.date} {self.name} ({self.uuid})"
 
 
 class Photo(BaseModel):
     album = models.ForeignKey(Album, on_delete=models.CASCADE, related_name="photos")
-    file = models.ImageField(upload_to=photo_upload_directory_name)
-    thumbnail = models.ImageField(upload_to=thumbnail_upload_directory_name, blank=True)
+    file = models.ImageField()
     visible = models.BooleanField(default=True)
 
     def __str__(self):
         return self.file.name
-
-    def save(self, *args, **kwargs):
-        if not self.file:
-            return
-
-        self.thumbnail = create_thumbnail_file(self)
-        super().save(*args, **kwargs)
 
 
 class Person(BaseModel):

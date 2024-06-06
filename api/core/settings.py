@@ -153,7 +153,7 @@ MEDIA_URL = '/uploads/'
 
 # File discovery directory
 
-MEDIA_DISCOVERY_ROOT = ''
+MEDIA_DISCOVERY_ROOT = '/media'
 
 
 # Default primary key field type
