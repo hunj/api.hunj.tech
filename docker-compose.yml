@@ -67,3 +67,4 @@ networks:
   hunjNet:
     driver: bridge
     name: hunjnetwork
+    external: true
