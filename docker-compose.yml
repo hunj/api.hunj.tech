@@ -6,7 +6,7 @@ services:
     restart: always
     volumes:
       - ./api:/api
-      - static_volume:/staticfiles
+      - static_volume:/api/staticfiles
       - ~/upload_photos:/media
     expose:
       - 8001
