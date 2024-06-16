@@ -7,6 +7,7 @@ services:
     volumes:
       - ./api:/api
       - static_volume:/api/staticfiles
+      - image_volume:/api/img
       - ~/upload_photos:/media
     expose:
       - 8001
@@ -39,12 +40,13 @@ services:
     build: ./nginx
     restart: always
     ports:
-      - 42069:8080
+      - 80:8080
     depends_on:
       - api
     volumes:
       - static_volume:/staticfiles
       - ~/upload_photos:/media
+      - image_volume:/img
     networks:
       - hunjNet
 
@@ -62,6 +64,7 @@ volumes:
   postgres_data:
   redis_data:
   static_volume:
+  image_volume:
 
 networks:
   hunjNet:
