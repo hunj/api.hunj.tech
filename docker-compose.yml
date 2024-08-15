@@ -55,6 +55,9 @@ services:
     restart: always
     expose:
       - 6379
+    command: /bin/sh -c "redis-server --requirepass $$REDIS_HOST_PASSWORD"
+    env_file:
+      - redis.env
     volumes:
       - redis_data:/data
     networks:
