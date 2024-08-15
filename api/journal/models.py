@@ -1,29 +1,114 @@
 from django.db import models
 from datetime import date
 
+CHECKLIST = [
+    "exercised",
+    "learned",
+    "socialized",
+    "meditated",
+    "alcohol",
+    "cleaned",
+    "ate_healthy",
+    "hydrated",
+]
 
-class EntryMeter(models.Model):
+
+KEYWORDS = [
+    "acceptable",
+    "accomplished",
+    "affectionate",
+    "afraid",
+    "alive",
+    "alone",
+    "angry",
+    "annoyed",
+    "anxious",
+    "appreciated",
+    "assertive",
+    "attractive",
+    "bored",
+    "cared for",
+    "caring",
+    "confident",
+    "conflicted",
+    "confused",
+    "connected",
+    "courageous",
+    "damaged",
+    "depressed",
+    "determined",
+    "disappointed",
+    "distracted",
+    "drained",
+    "elated",
+    "embarrassed",
+    "fascinated",
+    "focused",
+    "good",
+    "guilty",
+    "happy",
+    "helpless",
+    "hurt",
+    "hurtful",
+    "imaginative",
+    "inadequate",
+    "indecisive",
+    "indifferent",
+    "inspired",
+    "intelligent",
+    "interested",
+    "invisible",
+    "lazy",
+    "logical",
+    "lost",
+    "loved",
+    "loving",
+    "negative",
+    "nurturing",
+    "observant",
+    "okay",
+    "open",
+    "overwhelmed",
+    "passionate",
+    "playful",
+    "positive",
+    "productive",
+    "rebellious",
+    "relaxed",
+    "sad",
+    "satisfied",
+    "self-conscious",
+    "selfless",
+    "shocked",
+    "sick",
+    "smart",
+    "spirited",
+    "stressed",
+    "strong",
+    "thankful",
+    "tired",
+    "uncomfortable",
+    "uneventful",
+    "victimized",
+    "vulnerable",
+    "worried",
+]
+
+
+class JournalEntryKeyword(models.Model):
     name = models.TextField()
-    emoji = models.TextField()
+    color = models.TextField()
+
+
+class JournalEntryMeter(models.Model):
+    keyword = models.ForeignKey(JournalEntryKeyword)
+    emoji = models.TextField(default="")
     level = models.PositiveIntegerField(default=0)
 
 
-class EntryKeyword(models.Model):
-    keyword = models.TextField()
-
-
-class EntryChecklist(models.Model):
+class JournalEntryChecklist(models.Model):
     name = models.TextField()
-    done = models.BooleanField(default=False)
-
-    exercised = models.BooleanField(default=False)
-    learned = models.BooleanField(default=False)
-    socialized = models.BooleanField(default=False)
-    meditated = models.BooleanField(default=False)
-    alcohol = models.BooleanField(default=False)
-    cleaned = models.BooleanField(default=False)
-    ate_healthy = models.BooleanField(default=False)
-    hydrated = models.BooleanField(default=False)
+    checked = models.BooleanField(default=False)
 
 
 class JournalEntry(models.Model):
@@ -32,6 +117,9 @@ class JournalEntry(models.Model):
     thankful_note = models.TextField()
     struggle_note = models.TextField()
     hours_slept = models.PositiveIntegerField()
-    meters = models.ManyToManyField(EntryMeter)
-    keywords = models.ManyToManyField(EntryKeyword)
-    checklist = models.ForeignKey(EntryChecklist)
+    meters = models.ManyToManyField(JournalEntryMeter)
+    keywords = models.ManyToManyField(JournalEntryKeyword)
+    checklist = models.OneToOneField(JournalEntryChecklist)
+
+    def save(self):
+        instance = super().save()
