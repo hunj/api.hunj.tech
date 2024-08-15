@@ -1,10 +1,11 @@
+from django.utils.text import slugify
+from django.conf import settings
+from celery import shared_task
+
 import re
 from pathlib import Path
 from datetime import datetime
-
-from django.utils.text import slugify
-from django.conf import settings
-from celery import app
+import logging
 
 from .models import Album, Photo
 
@@ -12,7 +13,7 @@ from .models import Album, Photo
 DIRECTORY_FORMAT = r'^(\d{4}-\d{2}-\d{2}) (.*)$'  # "YYYY-MM-DD name name"
 
 
-# @app.task
+@shared_task()
 def discover_files_and_add():
     if not settings.MEDIA_DISCOVERY_ROOT:
         raise Exception("MEDIA_DISCOVERY_ROOT not set")
@@ -29,15 +30,19 @@ def discover_files_and_add():
             try:
                 album = Album.objects.get(name=album_name, date=album_date)
             except Album.DoesNotExist:
+                logging.debug(f'album "{album_name}" not found, creating new one')
                 album = Album.objects.create(
                     name=album_name, date=album_date, slug=slugify(album_name)
                 )
             print(album)
+
             files = [x for x in directory.iterdir() if x.is_file()]
             for file in files:
                 try:
                     photo = Photo.objects.get(album=album, file=file)
                 except Photo.DoesNotExist:
+                    logging.debug(f'file "{file}" for album "{album}" not found, creating new one')
                     photo = Photo.objects.create(
                         album=album, file=file
                     )
+            print(photo)
