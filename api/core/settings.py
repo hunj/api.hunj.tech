@@ -126,6 +126,21 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+DATABASES = {
+    "default": {
+        "ENGINE":   "django.db.backends.postgresql",
+        "NAME":     os.environ.get("POSTGRES_DB"),
+        "USER":     os.environ.get("POSTGRES_USER"),
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
+        "HOST":     os.environ.get("POSTGRES_HOST"),
+        "PORT":     os.environ.get("POSTGRES_PORT"),
+    }
+}
+
+# Celery
+CELERY_BROKER_URL = "redis://redis:6379"
+CELERY_RESULT_BACKEND = "redis://redis:6379"
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
