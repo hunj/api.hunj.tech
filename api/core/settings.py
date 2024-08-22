@@ -18,6 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8000',
     'http://localhost:8080',
+    'http://localhost:3000',
 ]
 
 # Quick-start development settings - unsuitable for production
@@ -42,8 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_extensions',
 
-    'photos',
+    'gallery',
+    'testimonials',
 ]
 
 MIDDLEWARE = [
@@ -123,6 +126,21 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+DATABASES = {
+    "default": {
+        "ENGINE":   "django.db.backends.postgresql",
+        "NAME":     os.environ.get("POSTGRES_DB"),
+        "USER":     os.environ.get("POSTGRES_USER"),
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
+        "HOST":     os.environ.get("POSTGRES_HOST"),
+        "PORT":     os.environ.get("POSTGRES_PORT"),
+    }
+}
+
+# Celery
+CELERY_BROKER_URL = "redis://redis:6379"
+CELERY_RESULT_BACKEND = "redis://redis:6379"
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -139,21 +157,21 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_ROOT = BASE_DIR.parent / 'staticfiles'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
-    BASE_DIR / 'staticfiles',
+    BASE_DIR / 'img',
 ]
 STATIC_URL = '/static/'
 
 
 # Uploaded files
 
-MEDIA_ROOT = BASE_DIR.parent / 'uploads'
-MEDIA_URL = '/uploads/'
+MEDIA_ROOT = '/media'
+MEDIA_URL = '/media/'
 
 # File discovery directory
 
-MEDIA_DISCOVERY_ROOT = ''
+MEDIA_DISCOVERY_ROOT = '/discover'
 
 
 # Default primary key field type
