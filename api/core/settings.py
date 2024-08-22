@@ -159,19 +159,19 @@ USE_TZ = True
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',
+    BASE_DIR / 'img',
 ]
 STATIC_URL = '/static/'
 
 
 # Uploaded files
 
-MEDIA_ROOT = BASE_DIR / 'media'
-MEDIA_URL = '/img/'
+MEDIA_ROOT = '/media'
+MEDIA_URL = '/media/'
 
 # File discovery directory
 
-MEDIA_DISCOVERY_ROOT = '/media'
+MEDIA_DISCOVERY_ROOT = '/discover'
 
 
 # Default primary key field type
